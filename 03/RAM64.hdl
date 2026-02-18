@@ -1,0 +1,158 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/3/a/RAM64.hdl
+/**
+ * Memory of sixty four 16-bit registers.
+ * If load is asserted, the value of the register selected by
+ * address is set to in; Otherwise, the value does not change.
+ * The value of the selected register is emitted by out.
+ */
+CHIP RAM64 {
+    IN in[16], load, address[6];
+    OUT out[16];
+
+    PARTS:
+   DMux8Way(in=load, sel=address[3..5],
+         a=outda, b=outdb, c=outdc, d=outdd,
+         e=outde, f=outdf, g=outdg, h=outdh);
+
+    DMux8Way(in=outda, sel=address[0..2],
+         a=out0, b=out1, c=out2, d=out3,
+         e=out4, f=out5, g=out6, h=out7);
+
+    DMux8Way(in=outdb, sel=address[0..2],
+         a=out8, b=out9, c=out10, d=out11,
+         e=out12, f=out13, g=out14, h=out15);
+
+    DMux8Way(in=outdc, sel=address[0..2],
+         a=out16, b=out17, c=out18, d=out19,
+         e=out20, f=out21, g=out22, h=out23);
+
+    DMux8Way(in=outdd, sel=address[0..2],
+         a=out24, b=out25, c=out26, d=out27,
+         e=out28, f=out29, g=out30, h=out31);
+
+    DMux8Way(in=outde, sel=address[0..2],
+         a=out32, b=out33, c=out34, d=out35,
+         e=out36, f=out37, g=out38, h=out39);
+
+    DMux8Way(in=outdf, sel=address[0..2],
+         a=out40, b=out41, c=out42, d=out43,
+         e=out44, f=out45, g=out46, h=out47);
+
+    DMux8Way(in=outdg, sel=address[0..2],
+         a=out48, b=out49, c=out50, d=out51,
+         e=out52, f=out53, g=out54, h=out55);
+
+    DMux8Way(in=outdh, sel=address[0..2],
+         a=out56, b=out57, c=out58, d=out59,
+         e=out60, f=out61, g=out62, h=out63);
+
+ Register(in=in, load=out0, out=outr0);
+ Register(in=in, load=out1, out=outr1);
+ Register(in=in, load=out2, out=outr2);
+ Register(in=in, load=out3, out=outr3);
+ Register(in=in, load=out4, out=outr4);
+ Register(in=in, load=out5, out=outr5);
+ Register(in=in, load=out6, out=outr6);
+ Register(in=in, load=out7, out=outr7);
+ Register(in=in, load=out8, out=outr8);
+ Register(in=in, load=out9, out=outr9);
+ Register(in=in, load=out10, out=outr10);
+ Register(in=in, load=out11, out=outr11);
+ Register(in=in, load=out12, out=outr12);
+ Register(in=in, load=out13, out=outr13);
+ Register(in=in, load=out14, out=outr14);
+ Register(in=in, load=out15, out=outr15);
+ Register(in=in, load=out16, out=outr16);
+ Register(in=in, load=out17, out=outr17);
+ Register(in=in, load=out18, out=outr18);
+ Register(in=in, load=out19, out=outr19);
+ Register(in=in, load=out20, out=outr20);
+ Register(in=in, load=out21, out=outr21);
+ Register(in=in, load=out22, out=outr22);
+ Register(in=in, load=out23, out=outr23);
+ Register(in=in, load=out24, out=outr24);
+ Register(in=in, load=out25, out=outr25);
+ Register(in=in, load=out26, out=outr26);
+ Register(in=in, load=out27, out=outr27);
+ Register(in=in, load=out28, out=outr28);
+ Register(in=in, load=out29, out=outr29);
+ Register(in=in, load=out30, out=outr30);
+ Register(in=in, load=out31, out=outr31);
+ Register(in=in, load=out32, out=outr32);
+ Register(in=in, load=out33, out=outr33);
+ Register(in=in, load=out34, out=outr34);
+ Register(in=in, load=out35, out=outr35);
+ Register(in=in, load=out36, out=outr36);
+ Register(in=in, load=out37, out=outr37);
+ Register(in=in, load=out38, out=outr38);
+ Register(in=in, load=out39, out=outr39);
+ Register(in=in, load=out40, out=outr40);
+ Register(in=in, load=out41, out=outr41);
+ Register(in=in, load=out42, out=outr42);
+ Register(in=in, load=out43, out=outr43);
+ Register(in=in, load=out44, out=outr44);
+ Register(in=in, load=out45, out=outr45);
+ Register(in=in, load=out46, out=outr46);
+ Register(in=in, load=out47, out=outr47);
+ Register(in=in, load=out48, out=outr48);
+ Register(in=in, load=out49, out=outr49);
+ Register(in=in, load=out50, out=outr50);
+ Register(in=in, load=out51, out=outr51);
+ Register(in=in, load=out52, out=outr52);
+ Register(in=in, load=out53, out=outr53);
+ Register(in=in, load=out54, out=outr54);
+ Register(in=in, load=out55, out=outr55);
+ Register(in=in, load=out56, out=outr56);
+ Register(in=in, load=out57, out=outr57);
+ Register(in=in, load=out58, out=outr58);
+ Register(in=in, load=out59, out=outr59);
+ Register(in=in, load=out60, out=outr60);
+ Register(in=in, load=out61, out=outr61);
+ Register(in=in, load=out62, out=outr62);
+ Register(in=in, load=out63, out=outr63);
+
+ 
+Mux8Way16(a=outr0, b=outr1, c=outr2, d=outr3,
+          e=outr4, f=outr5, g=outr6, h=outr7,
+          sel=address[0..2], out=outa);
+
+Mux8Way16(a=outr8, b=outr9, c=outr10, d=outr11,
+          e=outr12, f=outr13, g=outr14, h=outr15,
+          sel=address[0..2], out=outb);
+
+Mux8Way16(a=outr16, b=outr17, c=outr18, d=outr19,
+          e=outr20, f=outr21, g=outr22, h=outr23,
+          sel=address[0..2], out=outc);
+
+Mux8Way16(a=outr24, b=outr25, c=outr26, d=outr27,
+          e=outr28, f=outr29, g=outr30, h=outr31,
+          sel=address[0..2], out=outd);
+
+Mux8Way16(a=outr32, b=outr33, c=outr34, d=outr35,
+          e=outr36, f=outr37, g=outr38, h=outr39,
+          sel=address[0..2], out=oute);
+
+Mux8Way16(a=outr40, b=outr41, c=outr42, d=outr43,
+          e=outr44, f=outr45, g=outr46, h=outr47,
+          sel=address[0..2], out=outf);
+
+Mux8Way16(a=outr48, b=outr49, c=outr50, d=outr51,
+          e=outr52, f=outr53, g=outr54, h=outr55,
+          sel=address[0..2], out=outg);
+
+Mux8Way16(a=outr56, b=outr57, c=outr58, d=outr59,
+          e=outr60, f=outr61, g=outr62, h=outr63,
+          sel=address[0..2], out=outh);
+
+Mux8Way16(a=outa, b=outb, c=outc, d=outd,
+          e=oute, f=outf, g=outg, h=outh,
+          sel=address[3..5], out=out);
+
+
+    
+
+
+}
