@@ -1,0 +1,50 @@
+CHIP UnsaignedCompare16 {
+	IN
+		x[16], y[16];
+		
+	
+	OUT
+	   	
+ 	    lt, // = 1 si x < y  // <0
+		eq, // == 1 si x == y // == 0
+		gt; // = 1 si x > y // >0
+
+	PARTS:
+
+		
+		Not16(in=x, out=Nx);
+		Add16(a=x, b=y, out[0..7]=Op1, out[8..15]=Op2);
+        
+		
+		Or8Way(in=Op1, out=orLow);
+    		Or8Way(in=Op2, out=orHigh);
+    		Or(a=orLow, b=orHigh, out=orAll);
+		Not(in=orAll, out=NorAll);
+
+		And(a=NorAll, b=true, out=eq, out=ep);
+		And(a=orAll, b=true,  out = gt, out=gp);
+
+		Not(in=gp, out=ngt);
+		Not(in=ep, out=neq);
+		And(a=ngt, b=neq, out=lt);
+	}
+
+
+
+
+
+
+
+CHIP SatAddSub16 {
+    IN x[16], y[16], op;
+    OUT out[16], overflow;
+    PARTS:
+   
+    Xor16(a=y, b[0..15]=op, out=yXor);  
+   
+   
+    Add16(a=x, b=yXor, out=out, carry=cOut, carryIn=op1);
+    Xor(a=carryMSB, b=carryOut, out=overflow);
+}
+ 
+		
